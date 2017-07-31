@@ -1,0 +1,96 @@
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+
+<style>
+#thing{
+  display: none;
+}
+
+body{
+  text-align: center;
+  font-size: 25px;
+  color: #5B5C89;
+  background-color: #14091D;
+}
+
+#btn{
+  margin: 5px;
+}
+</style>
+
+<script>
+
+$(document).ready(function(){
+
+  url = "https://en.wikipedia.org/w/api.php?action=opensearch&search="
+  urlEnd = "&format=json&callback=?"
+  
+  $("#btn2").on("click",function(){
+    
+    entry = $("#searchBar").val();
+    urlSearch = url + entry + urlEnd;
+    //console.log(urlSearch);
+    $.getJSON(urlSearch,function(query){
+     $("#result1").html(query[2][0]);
+      document.getElementById("link1").href=(query[3][0]);
+     $("#result2").html(query[2][1]);
+      document.getElementById("link2").href=(query[3][1]);
+     $("#result3").html(query[2][2]);
+      document.getElementById("link3").href=(query[3][2]);
+     $("#result4").html(query[2][3]);
+      document.getElementById("link4").href=(query[3][3]);
+     $("#result5").html(query[2][4]);
+      document.getElementById("link5").href=(query[3][4]);
+       document.getElementById("thing").style.display = "block"; 
+       document.getElementById("link1").href=(query[3][0]);
+       console.log(query[3][0]);
+      
+    });
+  });
+  
+  
+   $("#btn").on("click",function(){
+    window.open("https://en.wikipedia.org/wiki/Special:Random")
+   });
+  
+});
+
+</script>
+
+<header>
+  <h1>Wikipedia Viewer<h1>
+</header>
+
+<body>
+  
+  <div class = "input-group col-md-12">
+    <input type = "text" type = submit id = "searchBar">
+    <button class = "primary" id = "btn2">Search</button>
+  </div>
+  <div class = "col-sm-12">
+  <button class = "btn btn-default" id  = "btn" type = "submit">
+  Random Wikipedia Entry
+  </button>
+  
+  <div class="panel-group" id ="thing">
+  <div class="panel panel-default">
+    <a href = "#" id = "link1"><div class="panel-body" id="result1"></div></a>
+  </div>
+  <div class="panel panel-default">
+    <a href = "#" id = "link2"><div class="panel-body" id="result2"></div></a>
+  </div>
+    <div class="panel panel-default">
+    <a href = "#" id = "link3"><div class="panel-body" id="result3"></div></a>
+  </div>
+    <div class="panel panel-default">
+    <a href = "#" id = "link4"><div class="panel-body" id="result4"></div></a>
+  </div>
+    <div class="panel panel-default">
+    <a href = "#" id = "link5"><div class="panel-body" id="result5"></div>
+  </div></a>
+</div>
+  
+  </div>
+</body>
